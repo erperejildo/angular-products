@@ -1,9 +1,15 @@
-<select (change)="filterByCategory($any($event.target).value)">
-  <option value="">All</option>
-  <option *ngFor="let category of categories" [value]="category.slug">
-    {{ category.name }}
-  </option>
-</select>
+<div class="custom-select-container">
+  <select
+    id="category-select"
+    (change)="filterByCategory($any($event.target).value)"
+    aria-label="Select a product category"
+  >
+    <option value="">All Categories</option>
+    <option *ngFor="let category of categories" [value]="category.slug">
+      {{ category.name }}
+    </option>
+  </select>
+</div>
 
 <div class="product-grid">
   <app-product-card
