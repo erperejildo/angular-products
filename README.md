@@ -32,3 +32,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - lazy loading
 - global card html and style
 - models
+- sticky menu for mobile
