@@ -1,3 +1,4 @@
+// product-list.component.ts
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -5,21 +6,31 @@ import { ProductCardComponent } from '../../components/product-card/product-card
 import { Category } from '../../models/category.model';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
+import { SharedService } from '../../services/shared.service';
+import { ProductDetailsModalComponent } from '../../shared/product-details-modal/product-details-modal.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, ProductCardComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    ProductCardComponent,
+    ProductDetailsModalComponent,
+  ],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
   categories: Category[] = [];
   selectedCategory: string = '';
-  favorites: any[] = [];
+  favorites: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    public sharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -69,5 +80,9 @@ export class ProductListComponent implements OnInit {
 
   isFavorite(product: Product): boolean {
     return this.favorites.some((p) => p.id === product.id);
+  }
+
+  onModalClose(): void {
+    this.sharedService.toggleModal(false);
   }
 }

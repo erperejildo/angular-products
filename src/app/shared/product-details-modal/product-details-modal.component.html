@@ -1,0 +1,27 @@
+<div class="modal-overlay" (click)="onCloseModal()"></div>
+
+<div class="modal">
+  <button class="close-btn" (click)="onCloseModal()">&times;</button>
+
+  <div class="modal-content">
+    <h2>{{ product.title }}</h2>
+    <div>{{ product.description }}</div>
+
+    <div class="product-images">
+      <img
+        *ngFor="let image of product.images"
+        [src]="image"
+        [alt]="product.title"
+      />
+    </div>
+
+    <div>${{ product.price }}</div>
+    <div>{{ product.stock }}</div>
+
+    <button class="favorite-btn" (click)="onToggleFavorite()">
+      <span class="material-icons">
+        {{ isFavorite ? 'favorite' : 'favorite_border' }}
+      </span>
+    </button>
+  </div>
+</div>

@@ -19,3 +19,12 @@
     (toggleFavorite)="toggleFavorite($event)"
   ></app-product-card>
 </div>
+
+<ng-container *ngIf="sharedService.selectedProduct$ | async as product">
+  <app-product-details-modal
+    *ngIf="sharedService.modalVisibility$ | async"
+    [product]="product"
+    (closeModal)="onModalClose()"
+    (toggleFavorite)="toggleFavorite($event)"
+  ></app-product-details-modal>
+</ng-container>

@@ -1,6 +1,6 @@
 .product-card {
   border: 1px solid #ddd;
-  border-radius: 12px;
+  border-radius: 0.5rem;
   overflow: hidden;
   background: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -21,7 +21,7 @@
     width: 100%;
     height: 180px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 0.5rem;
   }
 
   h3 {
@@ -29,42 +29,9 @@
     margin: 10px 0;
   }
 
-  p {
-    font-size: 0.9rem;
-    color: #555;
-  }
-
-  .favorite-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    font-size: 24px;
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .material-icons {
-      font-size: 28px;
-      color: #ff0000;
-      transition: color 0.2s;
-    }
-
-    &:hover .material-icons {
-      color: #ff0000;
-    }
-
-    .material-icons.favorite {
-      color: #ff0000;
-    }
-  }
-
   .rating {
     position: absolute;
-    left: 0.5rem;
+    right: 0.5rem;
     top: 0.5rem;
     display: flex;
     align-items: center;
