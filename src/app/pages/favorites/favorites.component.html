@@ -1,11 +1,14 @@
 <div *ngIf="favorites.length === 0">
-  <div class="no-favorites">No favorites yet</div>
+  <div class="no-favorites" role="alert" aria-live="polite">
+    No favorites yet
+  </div>
 </div>
 
-<div class="product-grid">
+<div class="product-grid" role="list">
   <app-product-card
     *ngFor="let product of favorites"
     [product]="product"
+    role="listitem"
   ></app-product-card>
 </div>
 
@@ -15,5 +18,7 @@
     [product]="product"
     (closeModal)="onModalClose()"
     (toggleFavorite)="toggleFavorite($event)"
+    aria-labelledby="modal-title"
+    aria-hidden="true"
   ></app-product-details-modal>
 </ng-container>

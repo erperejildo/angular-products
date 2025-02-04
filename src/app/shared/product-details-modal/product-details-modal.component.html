@@ -1,30 +1,54 @@
-<div class="modal-overlay" (click)="onCloseModal()"></div>
+<div class="modal-overlay" (click)="onCloseModal()" aria-hidden="true"></div>
 
-<div class="modal">
-  <button class="close-btn" (click)="onCloseModal()">&times;</button>
-
+<div
+  class="modal"
+  role="dialog"
+  aria-labelledby="modalTitle"
+  aria-modal="true"
+  tabindex="-1"
+>
   <div class="modal-content">
-    <h2>{{ product.title }}</h2>
+    <h2 id="modalTitle">{{ product.title }}</h2>
     <div class="description">{{ product.description }}</div>
 
+    <!-- 1. Favorite Button -->
+    <button
+      class="favorite-btn"
+      (click)="onToggleFavorite()"
+      attr.aria-label="{{
+        isFavorite ? 'Remove from favorites' : 'Add to favorites'
+      }}"
+      #favoriteButton
+    >
+      <span class="material-icons" aria-hidden="true">
+        {{ isFavorite ? 'favorite' : 'favorite_border' }}
+      </span>
+    </button>
+
+    <!-- 2. Close Button -->
+    <button
+      class="close-btn"
+      (click)="onCloseModal()"
+      aria-label="Close modal"
+      #closeButton
+    >
+      &times;
+    </button>
+
+    <!-- 3. Images -->
     <div class="product-images">
       <a
         *ngFor="let image of product.images"
         href="{{ image }}"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="View product image in a new tab"
       >
         <img [src]="image" [alt]="product.title" />
       </a>
     </div>
 
-    <div class="price">${{ product.price }}</div>
-    <div class="stock">{{ product.stock }} available</div>
-
-    <button class="favorite-btn" (click)="onToggleFavorite()">
-      <span class="material-icons">
-        {{ isFavorite ? 'favorite' : 'favorite_border' }}
-      </span>
-    </button>
+    <div class="price" aria-live="polite">${{ product.price }}</div>
+    <div class="stock" aria-live="polite">{{ product.stock }} available</div>
   </div>
 </div>

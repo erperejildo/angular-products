@@ -39,6 +39,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - image gallery (simple)
 - Responsive
 - Accessible
+- deployment
 
 - improve UX:
   - pagination
