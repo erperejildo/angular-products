@@ -1,0 +1,7 @@
+<h2>Favorites</h2>
+<div *ngFor="let product of favorites" class="product-card">
+  <img [src]="product.thumbnail" alt="{{ product.title }}" />
+  <h3>{{ product.title }}</h3>
+  <p>Price: ${{ product.price }}</p>
+  <button (click)="removeFavorite(product.id)">Remove</button>
+</div>
