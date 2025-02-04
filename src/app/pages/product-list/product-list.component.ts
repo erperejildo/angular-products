@@ -15,12 +15,14 @@ export class ProductListComponent implements OnInit {
   products: any[] = [];
   categories: Category[] = [];
   selectedCategory: string = '';
+  favorites: any[] = [];
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.loadProducts();
     this.loadCategories();
+    this.loadFavorites();
   }
 
   loadProducts(): void {
@@ -46,5 +48,24 @@ export class ProductListComponent implements OnInit {
     } else {
       this.loadProducts();
     }
+  }
+
+  toggleFavorite(product: any): void {
+    const index = this.favorites.findIndex((p) => p.id === product.id);
+    if (index === -1) {
+      this.favorites.push(product);
+    } else {
+      this.favorites.splice(index, 1);
+    }
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  }
+
+  loadFavorites(): void {
+    const storedFavorites = localStorage.getItem('favorites');
+    this.favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+  }
+
+  isFavorite(product: any): boolean {
+    return this.favorites.some((p) => p.id === product.id);
   }
 }
