@@ -29,4 +29,5 @@ There are some areas where the project could be improved if we had more time. Th
 
 - Pagination: the list of products could be paginated while the user scrolls. This would require some changes to the API as well.
 - Improve global UI: there was no initial design for this project, but some additional UI elements could improve the user experience, such as a skeleton loading for the products, ordering by rating/price, etc.
+- Images: Some of the images (specially the ones for the gallery) are huge, so it'd be nice to have another array for thumbnails.
 - Testing: while this wasn't a requirement, unit testing and BDD would be necessary if the project were to grow.
