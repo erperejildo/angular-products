@@ -35,7 +35,6 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.loadProducts();
     this.loadCategories();
-    this.loadFavorites();
   }
 
   loadProducts(): void {
@@ -64,18 +63,7 @@ export class ProductListComponent implements OnInit {
   }
 
   toggleFavorite(product: Product): void {
-    const index = this.favorites.findIndex((p) => p.id === product.id);
-    if (index === -1) {
-      this.favorites.push(product);
-    } else {
-      this.favorites.splice(index, 1);
-    }
-    localStorage.setItem('favorites', JSON.stringify(this.favorites));
-  }
-
-  loadFavorites(): void {
-    const storedFavorites = localStorage.getItem('favorites');
-    this.favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+    this.sharedService.toggleFavorite(product);
   }
 
   isFavorite(product: Product): boolean {

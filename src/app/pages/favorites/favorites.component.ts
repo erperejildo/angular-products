@@ -22,13 +22,9 @@ export class FavoritesComponent {
   }
 
   loadFavorites(): void {
-    const storedFavorites = localStorage.getItem('favorites');
-    this.favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
-  }
-
-  removeFavorite(productId: number): void {
-    this.favorites = this.favorites.filter((p) => p.id !== productId);
-    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    this.sharedService.favorites$.subscribe((favorites) => {
+      this.favorites = favorites;
+    });
   }
 
   openProductModal(product: Product): void {
@@ -37,13 +33,7 @@ export class FavoritesComponent {
   }
 
   toggleFavorite(product: Product): void {
-    const index = this.favorites.findIndex((p) => p.id === product.id);
-    if (index === -1) {
-      this.favorites.push(product);
-    } else {
-      this.favorites.splice(index, 1);
-    }
-    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    this.sharedService.toggleFavorite(product);
   }
 
   onModalClose(): void {

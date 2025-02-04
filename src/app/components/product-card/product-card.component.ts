@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { SharedService } from '../../services/shared.service';
 
@@ -12,18 +12,16 @@ import { SharedService } from '../../services/shared.service';
 })
 export class ProductCardComponent {
   @Input() product!: Product;
-  @Input() isFavorite!: boolean;
-  @Output() toggleFavorite = new EventEmitter<Product>();
-  @Output() removeFavorite = new EventEmitter<number>();
 
   constructor(private sharedService: SharedService) {}
 
-  onToggleFavorite() {
-    this.toggleFavorite.emit(this.product);
+  get isFavorite(): boolean {
+    return this.sharedService.isFavorite(this.product);
   }
 
-  onRemoveFavorite() {
-    this.removeFavorite.emit(this.product.id);
+  onToggleFavorite(event: Event): void {
+    event.stopPropagation();
+    this.sharedService.toggleFavorite(this.product);
   }
 
   openProductDetails(): void {

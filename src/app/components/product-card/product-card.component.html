@@ -1,8 +1,8 @@
 <div class="product-card" (click)="openProductDetails()">
   <button
     class="favorite-btn"
-    (click)="onRemoveFavorite()"
-    *ngIf="removeFavorite.observers.length"
+    (click)="onToggleFavorite($event)"
+    *ngIf="isFavorite"
   >
     <span class="material-icons">favorite</span>
   </button>
@@ -16,12 +16,10 @@
 
   <button
     class="favorite-btn"
-    (click)="onToggleFavorite()"
-    *ngIf="toggleFavorite.observers.length"
+    (click)="onToggleFavorite($event)"
+    *ngIf="!isFavorite"
   >
-    <span class="material-icons">
-      {{ isFavorite ? 'favorite' : 'favorite_border' }}
-    </span>
+    <span class="material-icons">favorite_border</span>
   </button>
 
   <div class="price">${{ product.price }}</div>
