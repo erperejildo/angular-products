@@ -1,11 +1,18 @@
 <div class="product-card">
+  <button
+    class="favorite-btn"
+    (click)="onRemoveFavorite()"
+    *ngIf="removeFavorite.observers.length"
+  >
+    <span class="material-icons">favorite</span>
+  </button>
+
   <img [src]="product.thumbnail" alt="{{ product.title }}" />
   <h3>{{ product.title }}</h3>
-  <p>Price: ${{ product.price }}</p>
-
-  <ng-container *ngIf="product.rating !== undefined">
-    <p>Rating: {{ product.rating }}</p>
-  </ng-container>
+  <div class="rating" *ngIf="product.rating !== undefined">
+    <span class="material-icons">star</span>
+    {{ product.rating }}
+  </div>
 
   <button
     class="favorite-btn"
@@ -17,11 +24,5 @@
     </span>
   </button>
 
-  <button
-    class="favorite-btn"
-    (click)="onRemoveFavorite()"
-    *ngIf="removeFavorite.observers.length"
-  >
-    <span class="material-icons">favorite</span>
-  </button>
+  <div class="price">${{ product.price }}</div>
 </div>

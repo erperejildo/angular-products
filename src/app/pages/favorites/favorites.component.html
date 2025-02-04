@@ -3,16 +3,6 @@
   <p>No favorites yet.</p>
 </div>
 
-<!-- <div class="product-grid">
-  <div *ngFor="let product of favorites" class="product-card">
-    <img [src]="product.thumbnail" alt="{{ product.title }}" />
-    <h3>{{ product.title }}</h3>
-    <p>Price: ${{ product.price }}</p>
-    <button class="favorite-btn" (click)="removeFavorite(product.id)">
-      <span class="material-icons">favorite</span>
-    </button>
-  </div>
-</div> -->
 <div class="product-grid">
   <app-product-card
     *ngFor="let product of favorites"
