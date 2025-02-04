@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
 import { Category } from '../../models/category.model';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
@@ -17,6 +18,7 @@ import { ProductDetailsModalComponent } from '../../shared/product-details-modal
     HttpClientModule,
     ProductCardComponent,
     ProductDetailsModalComponent,
+    SpinnerComponent,
   ],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
@@ -25,7 +27,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];
   selectedCategory: string = '';
-  favorites: Product[] = [];
+  isLoading: boolean = true; // Loading state
 
   constructor(
     private productService: ProductService,
@@ -38,8 +40,16 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.productService.getProducts().subscribe((data: any) => {
-      this.products = data.products;
+    this.isLoading = true; // Show spinner
+    this.productService.getProducts().subscribe({
+      next: (data: any) => {
+        this.products = data.products;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading products:', error);
+        this.isLoading = false;
+      },
     });
   }
 
@@ -64,10 +74,6 @@ export class ProductListComponent implements OnInit {
 
   toggleFavorite(product: Product): void {
     this.sharedService.toggleFavorite(product);
-  }
-
-  isFavorite(product: Product): boolean {
-    return this.favorites.some((p) => p.id === product.id);
   }
 
   onModalClose(): void {

@@ -30,6 +30,17 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 - libs: prettier, nothing for UI
 - lazy loading
+- persist the favorites list locally
 - global card html and style
 - models
 - sticky menu for mobile
+- shared service
+- spinner
+- image gallery (simple)
+- Responsive
+- Accessible
+
+- improve UX:
+  - pagination
+  - ordering
+  - skeletong loading
