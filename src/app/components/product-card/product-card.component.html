@@ -1,0 +1,27 @@
+<div class="product-card">
+  <img [src]="product.thumbnail" alt="{{ product.title }}" />
+  <h3>{{ product.title }}</h3>
+  <p>Price: ${{ product.price }}</p>
+
+  <ng-container *ngIf="product.rating !== undefined">
+    <p>Rating: {{ product.rating }}</p>
+  </ng-container>
+
+  <button
+    class="favorite-btn"
+    (click)="onToggleFavorite()"
+    *ngIf="toggleFavorite.observers.length"
+  >
+    <span class="material-icons">
+      {{ isFavorite ? 'favorite' : 'favorite_border' }}
+    </span>
+  </button>
+
+  <button
+    class="favorite-btn"
+    (click)="onRemoveFavorite()"
+    *ngIf="removeFavorite.observers.length"
+  >
+    <span class="material-icons">favorite</span>
+  </button>
+</div>

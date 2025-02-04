@@ -6,14 +6,10 @@
 </select>
 
 <div class="product-grid">
-  <div *ngFor="let product of products" class="product-card">
-    <img [src]="product.thumbnail" alt="{{ product.title }}" />
-    <h3>{{ product.title }}</h3>
-    <p>Price: ${{ product.price }}</p>
-    <p>Rating: {{ product.rating }}</p>
-
-    <button (click)="toggleFavorite(product)">
-      {{ isFavorite(product) ? 'Remove from Favorites' : 'Add to Favorites' }}
-    </button>
-  </div>
+  <app-product-card
+    *ngFor="let product of products"
+    [product]="product"
+    [isFavorite]="isFavorite(product)"
+    (toggleFavorite)="toggleFavorite($event)"
+  ></app-product-card>
 </div>
