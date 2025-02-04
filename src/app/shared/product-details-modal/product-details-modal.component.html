@@ -5,18 +5,21 @@
 
   <div class="modal-content">
     <h2>{{ product.title }}</h2>
-    <div>{{ product.description }}</div>
+    <div class="description">{{ product.description }}</div>
 
     <div class="product-images">
-      <img
+      <a
         *ngFor="let image of product.images"
-        [src]="image"
-        [alt]="product.title"
-      />
+        href="{{ image }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img [src]="image" [alt]="product.title" />
+      </a>
     </div>
 
-    <div>${{ product.price }}</div>
-    <div>{{ product.stock }}</div>
+    <div class="price">${{ product.price }}</div>
+    <div class="stock">{{ product.stock }} available</div>
 
     <button class="favorite-btn" (click)="onToggleFavorite()">
       <span class="material-icons">
