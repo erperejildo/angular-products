@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { Category } from '../../models/category.model';
+import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, ProductCardComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
@@ -50,7 +52,7 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  toggleFavorite(product: any): void {
+  toggleFavorite(product: Product): void {
     const index = this.favorites.findIndex((p) => p.id === product.id);
     if (index === -1) {
       this.favorites.push(product);
@@ -65,7 +67,7 @@ export class ProductListComponent implements OnInit {
     this.favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
   }
 
-  isFavorite(product: any): boolean {
+  isFavorite(product: Product): boolean {
     return this.favorites.some((p) => p.id === product.id);
   }
 }
